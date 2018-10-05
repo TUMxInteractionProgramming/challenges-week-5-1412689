@@ -107,7 +107,16 @@ function sendMessage() {
 
     // #8 let's now use the real message #input
     var message = new Message($('#message').val());
-    console.log("New message:", message);
+     // checking if sended message is empty
+     if ($('#message').val() !== "") {
+        console.log("New message:", message);
+
+        // #8 convenient message append with jQuery:
+        $('#messages').append(createMessageElement(message));
+    } else {
+        alert("Please, enter your message"); //if message is empty an alert appears
+        return false; 
+    };
 
     // #8 convenient message append with jQuery:
     $('#messages').append(createMessageElement(message));
@@ -118,6 +127,9 @@ function sendMessage() {
 
     // #8 clear the message input
     $('#message').val('');
+
+    currentChannel.messages.push(message);
+    currentChannel.messageCount += 1;
 }
 
 /**
@@ -238,26 +250,7 @@ function restoreChannel() {
     $('#send-button').show();
     $('#create').hide();
 }
-/**
- * #10 This #constructor function creates a new Channel.
- * @param channelName `String` a channel name
- * @constructor
- */
-function Channel(newChannelName) {
-    // copy my location
-    this.name = newChannelName;
-    this.createdOn = new Date() //now
-    this.createdBy = currentLocation.what3words;
-    this.starred = false;
-    this.expiresIn = 100;
-    this.messageCount = 0;
-    this.messages = [];
-}
 
-
-/**
- * #10 Function to check imputs and create Channel
- */
 function createChannel() {
     var messageText = $('#message').val()
     var isMessageValid = messageText !== "";
@@ -273,3 +266,23 @@ function createChannel() {
 
     }
 }
+/**
+ * #10 This #constructor function creates a new Channel.
+ * @param channelName `String` a channel name
+ * @constructor
+ */
+function Channel(ChannelName) {
+    // copy my location
+    this.name = ChannelName;
+    this.createdOn = new Date() //now
+    this.createdBy = currentLocation.what3words;
+    this.starred = false;
+    this.expiresIn = 100;
+    this.messageCount = 0;
+    this.messages = [];
+}
+
+
+/**
+ * #10 Function to check imputs and create Channel
+ */

@@ -128,9 +128,11 @@ h1 i {
     right: 16px;
     /* #7 #icns #small adjust icon size */
     font-size:24px;
+    top:25%;
 }
 
 #abort i{
+    top: auto;
     right: 85px;
     font-size: 16px;
 }
@@ -320,6 +322,7 @@ button .accent{
     border: none;
     /* alignment */
     flex-grow: 1;
+    padding: 8px 16px 8px 16px;
 }
 
 /* MESSAGES */
