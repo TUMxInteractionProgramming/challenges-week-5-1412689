@@ -144,17 +144,22 @@ function createMessageElement(messageObject) {
         '</div>';
 }
 
-
+var listChannel =[yummy, sevencontinents, killerapp, firstpersononmars, octoberfest,]
 function listChannels() {
     // #8 channel onload
     //$('#channels ul').append("<li>New Channel</li>")
 
     // #8 five new channels
-    $('#channels ul').append(createChannelElement(yummy));
-    $('#channels ul').append(createChannelElement(sevencontinents));
-    $('#channels ul').append(createChannelElement(killerapp));
-    $('#channels ul').append(createChannelElement(firstpersononmars));
-    $('#channels ul').append(createChannelElement(octoberfest));
+    // $('#channels ul').append(createChannelElement(yummy));
+    // $('#channels ul').append(createChannelElement(sevencontinents));
+    // $('#channels ul').append(createChannelElement(killerapp));
+    // $('#channels ul').append(createChannelElement(firstpersononmars));
+    // $('#channels ul').append(createChannelElement(octoberfest));
+    for (var i=0; i < listChannel.length; i++) {
+        console.log ('Add channel', listChannel[i]);
+          //$('<li>').html(listChannel[i]).appendTo('#channels ul'); 
+          $('#channels ul').append(createChannelElement(listChannel[i]));
+    }
 }
 
 /**
@@ -192,4 +197,10 @@ function createChannelElement(channelObject) {
 
     // return the complete channel
     return channel;
+}
+
+function onclicknew(){
+    listChannel.sort(function(a,b){
+        return new Date(b.createdOn) - new Date(a.createdOn);
+    });
 }

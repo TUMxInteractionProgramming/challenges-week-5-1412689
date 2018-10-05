@@ -21,18 +21,33 @@ body {
     background-color: #F5F5F5;
 }
 
+button {
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: white;
+    border: none;
+    color: black;
+    text-transform: uppercase;
+    
+
+}
+
 button, strong {
     text-transform: uppercase;
 }
 
 /* LAYOUT */
-
-#channels {
+#channels, #tab-bar, #left-app-bar{
+    border: none;
+    box-shadow: 2px 0 20px -5px #333;
+}
+#channels{
     position: absolute;
     height: 100%;
     width: 40%;
 
     background-color: #3F51B5; /* temporary background color to see the effect, is completely hidden now */
+    
 }
 
 #chat {
@@ -149,6 +164,29 @@ li.selected {
     border-left: 4px solid #3F51B5;
 }
 
+/* Add channel*/
+#channels >#add-channel{
+    bottom: 88px;
+    right: 16px;
+    position: absolute;
+    display: flex;
+    
+}
+#add-channel button {
+    background-color: #CDDC39;
+    border-radius: 50%;
+    height: 56px;
+    min-width: 56px;
+    font-size: 24px;
+    box-shadow:rgba(0, 0, 0, 0.4) 0 2px 5px;
+}
+
+button:hover{
+    color: #3F51B5;
+    box-shadow: 0 25px 55px 0 rgba(0, 0, 0, 0.21), 0 16px 28px 0 rgba(0, 0, 0, 0.22);
+    transition: all 0.2s ease-out;
+}
+
 /* TAB BAR */
 
 #tab-bar, #chat-bar {
@@ -158,6 +196,8 @@ li.selected {
     bottom: 0;
     width: 100%;
     display: flex;
+    box-shadow: 0 -5px 10px -5px #333;
+    height: 72px;
 }
 
 #tab-bar button, #chat-bar button {
@@ -165,7 +205,7 @@ li.selected {
     border: none;
     font-size: 13px;
     width: 33%;
-    height: 72px;
+    
     padding: 16px;
 
     /* flexify the buttons by growing them equally */
@@ -193,6 +233,15 @@ li.selected {
 
     /* #7 #icns #smile adjust fa size */
     font-size: 24px;
+    margin: auto;
+    margin-left: 8px;
+    margin-right: 8px;
+    
+    
+}
+#chat-bar >button{
+    padding: 8px 16px 8px 16px;
+    background-color: #3F51B5;
 }
 
 #emojis {
@@ -219,6 +268,20 @@ li.selected {
 
     /* hide the #smile menu */
     display: none;
+    
+    
+}
+
+button#emojis-button{
+    height: 40px;
+    background-color: #3F51B5;
+    border-radius: 5%;
+    color: white;
+}
+button#send-button{
+    height: 40px;
+    background-color: #CDDC39;
+    border-radius: 5%;
 }
 
 /* #8 #input #styles for font, border, and alignment */
@@ -237,6 +300,8 @@ li.selected {
     margin-bottom: 8px;
     margin-left: 2.5%;
     position: relative;
+    
+    
 }
 
 .message h3 {
@@ -268,6 +333,32 @@ li.selected {
 .message p {
     background-color: white;
     padding: 16px;
+    box-shadow: 0px 2px 10px -4px #333;
+    -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+
+p:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -20px;
+    right: auto;
+    bottom: auto;
+    border: 20px solid;
+    border-color: white transparent transparent transparent;
+}
+.own p:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: -20px;
+    left: auto;
+    bottom: auto;
+    border: 20px solid;
+    border-color: white transparent transparent transparent;
 }
 
 .message button {
@@ -280,6 +371,8 @@ li.selected {
     position: absolute;
     right: 8px;
     bottom: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .message.own {
