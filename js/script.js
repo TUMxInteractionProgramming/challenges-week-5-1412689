@@ -145,7 +145,7 @@ function createMessageElement(messageObject) {
 }
 
 var listChannel =[yummy, sevencontinents, killerapp, firstpersononmars, octoberfest,]
-function listChannels() {
+function listChannels(sorting) {
     // #8 channel onload
     //$('#channels ul').append("<li>New Channel</li>")
 
@@ -155,11 +155,23 @@ function listChannels() {
     // $('#channels ul').append(createChannelElement(killerapp));
     // $('#channels ul').append(createChannelElement(firstpersononmars));
     // $('#channels ul').append(createChannelElement(octoberfest));
+    //$('#channels ul').empty();
+    switch (sorting) {
+        case "star":
+            listChannel.sort(onclickTrending);
+            break;
+        case "hot":
+            listChannel.sort(onclickFavorites);
+            break;
+        default:
+            listChannel.sort(onclickNew);
+    };
+    
+
     for (var i=0; i < listChannel.length; i++) {
-        console.log ('Add channel', listChannel[i]);
           //$('<li>').html(listChannel[i]).appendTo('#channels ul'); 
           $('#channels ul').append(createChannelElement(listChannel[i]));
-    }
+    };
 }
 
 /**
@@ -199,8 +211,65 @@ function createChannelElement(channelObject) {
     return channel;
 }
 
-function onclicknew(){
-    listChannel.sort(function(a,b){
-        return new Date(b.createdOn) - new Date(a.createdOn);
-    });
+function onclickNew(Date_a,Date_b){
+        return new Date(Date_b.createdOn) - new Date(Date_a.createdOn);
+}
+function onclickTrending(a, b){
+    return (b.messageCount - a.messageCount);
+}
+
+//  starred for favorites
+function onclickFavorites(a, b){
+    return (b.starred - a.starred);
+}
+
+
+function addChannel() {
+    $('#right-app-bar').hide();
+    $('#createChannelForm').show();
+    $('#send-button').hide();
+    $('#create').show();
+}
+
+function restoreChannel() {
+    $('#newChannel').val('');
+    $('#right-app-bar').show();
+    $('#createChannelForm').hide();
+    $('#send-button').show();
+    $('#create').hide();
+}
+/**
+ * #10 This #constructor function creates a new Channel.
+ * @param channelName `String` a channel name
+ * @constructor
+ */
+function Channel(newChannelName) {
+    // copy my location
+    this.name = newChannelName;
+    this.createdOn = new Date() //now
+    this.createdBy = currentLocation.what3words;
+    this.starred = false;
+    this.expiresIn = 100;
+    this.messageCount = 0;
+    this.messages = [];
+}
+
+
+/**
+ * #10 Function to check imputs and create Channel
+ */
+function createChannel() {
+    var messageText = $('#message').val()
+    var isMessageValid = messageText !== "";
+    var channelName = $('#newChannel').val();
+    var isChannelNameValid =  channelName !== "" && channelName.charAt(0) === "#" && !channelName.includes(" ");
+    if (isMessageValid && isChannelNameValid) {
+        var channel = new Channel(channelName);
+        var message = new Message(messageText);
+        currentChannel = channel;
+        sendMessage();
+        switchChannel(channel);
+        restoreChannel();
+
+    }
 }

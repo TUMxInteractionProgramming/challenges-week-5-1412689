@@ -34,13 +34,13 @@
 <div id="channels">
 
     <!-- APP BAR for APP TITLE -->
-    <h1 id="left-app-bar">
+    <h1 id="left-app-bar" class="md-whiteframe-6dp">
         <img src="http://ip.lfe.mw.tum.de/sections/moocus.png" alt="Moocus, the chatty duck!" style="height: 56px;">
         chatter|app
     </h1>
 
     <!-- CHANNELS -->
-    <ul>
+    <ul class="md-whiteframe-6dp">
         <!-- #8 #remove all #channels -->
         <!-- This document will trigger many warning and errors when using the W3C Validator due to comments in comments, which is not allowed. We let them in here so you can check out the solution for Challenge 7. -->
         <!-- #7  calls our switchChannel with the corresponding OBJECT as an argument -->
@@ -93,23 +93,23 @@
     </ul>
     <!--Add Button-->
     <div id="add-channel">
-        <button ><i class="fas fa-plus"></i></button>
+        <button onclick="addChannel()"><i class="fas fa-plus"></i></button>
     </div>
     
 
     <!-- TAB BAR -->
     <div id="tab-bar">
-        <button class="selected" id="tab-new" onclick="selectTab('#tab-new'); onclicknew(listChannels())">
+        <button class="selected" id="tab-new" onclick="selectTab('#tab-new'); listChannels('new')">
             <!-- #7  replacing icons -->
             <i class="far fa-lightbulb"></i>
             New
         </button>
-        <button id="tab-trending" onclick="selectTab('#tab-trending')">
+        <button id="tab-trending" onclick="selectTab('#tab-trending');listChannels('hot')">
             <!-- #7  replacing icons -->
             <i class="fas fa-fire"></i>
             Trending
         </button>
-        <button id="tab-favorites" onclick="selectTab('#tab-favorites')">
+        <button id="tab-favorites" onclick="selectTab('#tab-favorites');listChannels('star')">
             <!-- #7  replacing icons -->
             <i class="fas fa-star"></i>
             Favorites
@@ -120,12 +120,23 @@
 <div id="chat">
 
     <!-- APP BAR for CHANNEL TITLE -->
-    <h1>
-        <span id="channel-name">#SevenContinents</span>
-        <small id="channel-location">by <strong>cheeses.yard.applies</strong></small>
-        <!-- #7 star is now font-awesome -->
-        <i class="fas fa-star" onclick="star()"></i>
+    <h1 class="md-whiteframe-6dp">
+        <div id="right-app-bar">
+            <span id="channel-name">#SevenContinents</span>
+            <small id="channel-location">by <strong>cheeses.yard.applies</strong></small>
+            <!-- #7 star is now font-awesome -->
+            <button class="primary"></button><i class="fas fa-star" onclick="star()"></i></button>
+        </div>
+        <div id="createChannelForm">
+            <div id="createChannelLayout">
+                <input type="text" placeholder="Enter a #ChannelName" maxlength="140" id="newChannel"/>
+                <button class="primary" id="abort" onclick="restoreChannel()">
+                    <i class="fas fa-times"></i> ABORT
+                </button>
+            </div>
+        </div>
     </h1>
+
 
     <div id="messages">
 
@@ -177,7 +188,7 @@
     </div>
 
     <!-- ChAT BAR -->
-    <div id="chat-bar">
+    <div id="chat-bar" class="md-whiteframe-6dp">
         <button id="emojis-button" onclick="toggleEmojis()">
             <!-- #7 replacing icons -->
             <i class="far fa-smile"></i>
@@ -187,7 +198,8 @@
                It also gets an id -->
         <input type="text" placeholder="Message..." maxlength="140" id="message">
         <!-- #8 send message requires a button -->
-        <button id="send-button" onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>
+        <button class="accent" id="send-button" onclick="sendMessage()"><i class="fas fa-arrow-right"></i></button>
+        <button class="accent" id="create" onclick="createChannel()">CREATE</button>
     </div>
 </div>
 
